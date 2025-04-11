@@ -6,7 +6,7 @@ convs: [16, 32, 64, 64, 128]
 export_interval: 100
 faces_to_part: [8000, 16000, 20000]
 global_step: False
-gpu: 0
+gpu: 1
 init_weights: 0.002
 initial_mesh: ./data/giraffe_initmesh.obj
 input_pc: ./data/giraffe.ply

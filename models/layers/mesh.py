@@ -10,7 +10,7 @@ from pytorch3d.ops.knn import knn_gather, knn_points
 
 class Mesh:
 
-    def __init__(self, file, hold_history=False, vs=None, faces=None, device='cpu', gfmm=True):
+    def __init__(self, file, device, hold_history=False, vs=None, faces=None, gfmm=True):
         if file is None:
             return
         self.filename = Path(file)
@@ -88,11 +88,15 @@ class Mesh:
             self.nvs.append(len(e))
             self.nvsi.append(len(e) * [i])
             self.nvsin.append(list(range(len(e))))
-        self.vei = torch.from_numpy(np.concatenate(np.array(self.vei)).ravel()).to(self.device).long()
-        self.nvsi = torch.Tensor(np.concatenate(np.array(self.nvsi)).ravel()).to(self.device).long()
-        self.nvsin = torch.from_numpy(np.concatenate(np.array(self.nvsin)).ravel()).to(self.device).long()
+
+        vei_tmp = np.concatenate(np.asarray(self.vei)).ravel()
+        # todo: seems like copying to gpu is very slow
+        self.vei = torch.as_tensor(vei_tmp, device=self.device).long()
+        print(self.vei.size())
+        self.nvsi = torch.as_tensor(np.concatenate(np.asarray(self.nvsi)).ravel(), device=self.device).long()
+        self.nvsin = torch.as_tensor(np.concatenate(np.asarray(self.nvsin)).ravel(), device=self.device).long()
         ve_in = copy.deepcopy(self.ve)
-        self.ve_in = torch.from_numpy(np.concatenate(np.array(ve_in)).ravel()).to(self.device).long()
+        self.ve_in = torch.as_tensor(np.concatenate(np.asarray(ve_in)).ravel(), device=self.device).long()
         self.max_nvs = max(self.nvs)
         self.nvs = torch.Tensor(self.nvs).to(self.device).float()
         self.edge2key = edge2key
