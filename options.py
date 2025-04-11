@@ -3,7 +3,7 @@ import os
 import numpy as np
 import torch
 
-MANIFOLD_DIR = r'~/code/Manifold/build'  # path to manifold software (https://github.com/hjwdzh/Manifold)
+MANIFOLD_DIR = r'~/Documents/PyProjects/Manifold/build'  # path to manifold software (https://github.com/hjwdzh/Manifold)
 
 
 class Options:
@@ -43,7 +43,7 @@ class Options:
         parser.add_argument('--overlap', type=int, default=0, help='overlap for bfs')
         parser.add_argument('--global-step', action='store_true',
                             help='perform the optimization step after all the parts are forwarded (only matters if nparts > 2)')
-        parser.add_argument('--manifold-res', default=100000, type=int, help='resolution for manifold upsampling')
+        parser.add_argument('--manifold-res', default=10000, type=int, help='resolution for manifold upsampling')
         parser.add_argument('--unoriented', action='store_true',
                             help='take the normals loss term without any preferred orientation')
         parser.add_argument('--init-weights', type=float, default=0.002, help='initialize NN with this size')

@@ -37,6 +37,7 @@ if opts.beamgap_iterations > 0:
     beamgap_loss.update_pm(part_mesh, torch.cat([input_xyz, input_normals], dim=-1))
 
 for i in range(opts.iterations):
+    print("iteration: {}".format(i))
     num_samples = options.get_num_samples(i % opts.upsamp)
     if opts.global_step:
         optimizer.zero_grad()

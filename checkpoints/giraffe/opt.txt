@@ -1,0 +1,28 @@
+ang_wt: 0.1
+beamgap_iterations: 0
+beamgap_modulo: 1
+begin_samples: 15000
+convs: [16, 32, 64, 64, 128]
+export_interval: 100
+faces_to_part: [8000, 16000, 20000]
+global_step: False
+gpu: 0
+init_weights: 0.002
+initial_mesh: ./data/giraffe_initmesh.obj
+input_pc: ./data/giraffe.ply
+iterations: 6000
+leaky_relu: 0.01
+local_non_uniform: 0.1
+lr: 0.00011
+manifold_always: False
+manifold_res: 10000
+max_faces: 10000
+overlap: 0
+pools: [0.0, 0.0, 0.0, 0.0]
+res_blocks: 3
+samples: 25000
+save_path: ./checkpoints/giraffe
+torch_seed: 5
+transfer_data: False
+unoriented: False
+upsamp: 1000
